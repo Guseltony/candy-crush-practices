@@ -68,5 +68,21 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(this.id, "dragend");
 
     // what is a valid move
+    let validMoves = [
+      boardIdBeingDragged - 1,
+      boardIdBeingDragged - width,
+      boardIdBeingDragged + 1,
+      boardIdBeingDragged + width,
+    ];
+    let validMove = validMoves.includes(boardIdBeingReplaced);
+
+    if (boardIdBeingReplaced && validMove) {
+      boardIdBeingReplaced = null;
+    } else if (boardIdBeingReplaced && !validMove) {
+      boards[boardIdBeingReplaced].style.backgroundColor = colorBeingReplaced;
+      boards[boardIdBeingDragged].style.backgroundColor = colorBeingDragged;
+    } else
+      boards[boardIdBeingDragged].style.backgroundColor = colorBeingDragged;
+
   }
 });
